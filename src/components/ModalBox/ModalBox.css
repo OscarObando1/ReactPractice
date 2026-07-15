@@ -1,0 +1,63 @@
+.modal-box__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 24, 40, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 100;
+}
+
+.modal-box {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-5);
+  outline: none;
+}
+
+.modal-box__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.modal-box__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+.modal-box__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  padding: 2px;
+}
+
+.modal-box__body {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-5);
+}
+
+.modal-box__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+.modal-box__cancel {
+  background: var(--color-bg-muted) !important;
+  color: var(--color-text) !important;
+}
+
+.modal-box__cancel:hover {
+  background: var(--color-border) !important;
+}

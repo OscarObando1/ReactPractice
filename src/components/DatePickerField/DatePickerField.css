@@ -1,0 +1,23 @@
+.datepicker-field__wrapper {
+  flex: 1;
+}
+
+.datepicker-field .react-datepicker__input-container input {
+  width: 100%;
+}
+
+.datepicker-field .react-datepicker {
+  font-family: var(--font-family);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.datepicker-field .react-datepicker__header {
+  background: var(--color-primary-soft);
+  border-bottom: none;
+}
+
+.datepicker-field .react-datepicker__day--selected,
+.datepicker-field .react-datepicker__day--keyboard-selected {
+  background: var(--color-primary);
+}
