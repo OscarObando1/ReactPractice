@@ -60,10 +60,6 @@
   display: block;
 }
 
-.header__signin:hover {
-  background: var(--color-bg-muted) !important;
-}
-
 .header__burger {
   display: none;
   background: none;

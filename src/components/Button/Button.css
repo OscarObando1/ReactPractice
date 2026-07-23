@@ -54,6 +54,12 @@
   --btn-bg-hover: var(--color-important-hover);
   --btn-bg-pressed: var(--color-important-pressed);
 }
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-bg-hover: var(--color-bg-muted);
+  --btn-bg-pressed: var(--color-bg-muted);
+  color: var(--color-text);
+}
 
 /* Sizes */
 .btn--sm {

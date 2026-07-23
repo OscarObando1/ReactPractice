@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import { useTranslation } from "@i18n/context";
 import {
   LogoIcon,
   MailIcon,
@@ -9,25 +11,27 @@ import {
 } from "../icons/Icons";
 import "./Footer.css";
 
-const NAV_BLOCKS = [
-  { title: "Product", links: ["Features", "Pricing"] },
-  { title: "Resources", links: ["Blog", "User guides", "Webinars"] },
-  { title: "Company", links: ["About us", "Contacts us"] },
-];
-
-const LANGUAGES = ["English", "Español", "Deutsch", "Français"];
-
 /**
  * Page footer: brand, navigation blocks, newsletter subscription form,
- * language switcher, privacy list and social icons.
+ * language switcher, privacy list and social icons. Text is translated via the
+ * i18n context; the language switcher updates the whole app's language.
  *
  * @param {object} props
  * @param {(lang:string) => void} [props.onLanguageChange]
  * @param {(email:string) => void} [props.onSubscribe]
  */
 function Footer({ onLanguageChange, onSubscribe }) {
+  const { t, language, setLanguage, languages } = useTranslation();
   const [email, setEmail] = useState("");
-  const [language, setLanguage] = useState(LANGUAGES[0]);
+
+  const navBlocks = [
+    { title: t("footer.product"), links: [t("footer.features"), t("footer.pricing")] },
+    {
+      title: t("footer.resources"),
+      links: [t("footer.blog"), t("footer.userGuides"), t("footer.webinars")],
+    },
+    { title: t("footer.company"), links: [t("footer.about"), t("footer.contact")] },
+  ];
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -38,21 +42,22 @@ function Footer({ onLanguageChange, onSubscribe }) {
 
   const handleLanguage = (e) => {
     setLanguage(e.target.value);
-    onLanguageChange?.(e.target.value);
+    const selected = languages.find((l) => l.code === e.target.value);
+    onLanguageChange?.(selected?.label ?? e.target.value);
   };
 
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <a className="footer__logo" href="#home">
+          <Link className="footer__logo" to="/">
             <LogoIcon className="footer__logo-icon" />
             <span>learn</span>
-          </a>
+          </Link>
         </div>
 
         <div className="footer__nav">
-          {NAV_BLOCKS.map((block) => (
+          {navBlocks.map((block) => (
             <div className="footer__block" key={block.title}>
               <h4 className="footer__block-title">{block.title}</h4>
               <ul>
@@ -67,23 +72,21 @@ function Footer({ onLanguageChange, onSubscribe }) {
         </div>
 
         <div className="footer__subscribe">
-          <h4 className="footer__block-title">Subscribe to our newsletter</h4>
-          <p className="footer__subscribe-note">
-            For product announcements and exclusive insights
-          </p>
+          <h4 className="footer__block-title">{t("footer.newsletterTitle")}</h4>
+          <p className="footer__subscribe-note">{t("footer.newsletterNote")}</p>
           <form className="footer__form" onSubmit={handleSubscribe}>
             <div className="footer__input">
               <MailIcon className="footer__input-icon" />
               <input
                 type="email"
-                placeholder="Input your email"
+                placeholder={t("footer.emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                aria-label="Email address"
+                aria-label={t("footer.emailAria")}
               />
             </div>
             <Button type="submit" variant="prime" size="md">
-              Subscribe
+              {t("footer.subscribe")}
             </Button>
           </form>
         </div>
@@ -95,18 +98,19 @@ function Footer({ onLanguageChange, onSubscribe }) {
             <select
               value={language}
               onChange={handleLanguage}
-              aria-label="Select language"
+              aria-label={t("footer.languageAria")}
             >
-              {LANGUAGES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
+              {languages.map((lang) => (
+                <option key={lang.code} value={lang.code}>
+                  {lang.label}
                 </option>
               ))}
             </select>
           </div>
 
           <p className="footer__copy">
-            © 2023 Learn, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a>
+            {t("footer.rights")} · <a href="#">{t("footer.privacy")}</a> ·{" "}
+            <a href="#">{t("footer.terms")}</a>
           </p>
 
           <div className="footer__social">

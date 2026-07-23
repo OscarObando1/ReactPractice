@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { AccountIcon, MoonIcon, SignOutIcon } from "../icons/Icons";
-import "./MiniProfile.css";
+import "./UserMenu.css";
 
 /**
  * Dropdown revealed by clicking the header avatar. Offers quick access to
@@ -15,7 +15,7 @@ import "./MiniProfile.css";
  * @param {boolean} [props.nightMode]
  * @param {(value:boolean) => void} [props.onToggleNight]
  */
-function MiniProfile({
+function UserMenu({
   user,
   open,
   onClose,
@@ -25,47 +25,56 @@ function MiniProfile({
   onToggleNight,
 }) {
   const ref = useRef(null);
+  // Keep the latest onClose in a ref so the outside-click/escape effect only
+  // re-subscribes when `open` changes, not on every parent re-render that
+  // hands us a new onClose identity.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!open) return undefined;
     const handleClick = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) onClose?.();
+      if (ref.current && !ref.current.contains(e.target)) onCloseRef.current?.();
     };
-    const handleKey = (e) => e.key === "Escape" && onClose?.();
+    const handleKey = (e) => e.key === "Escape" && onCloseRef.current?.();
     document.addEventListener("mousedown", handleClick);
     document.addEventListener("keydown", handleKey);
     return () => {
       document.removeEventListener("mousedown", handleClick);
       document.removeEventListener("keydown", handleKey);
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
 
   return (
-    <div className="mini-profile" ref={ref} role="menu">
-      <header className="mini-profile__head">
-        <img className="mini-profile__avatar" src={user.avatar} alt="" />
-        <div className="mini-profile__id">
-          <p className="mini-profile__name">{user.name}</p>
-          <p className="mini-profile__email">{user.email}</p>
+    <div className="user-menu" ref={ref} role="menu">
+      <header className="user-menu__head">
+        <img
+          className="user-menu__avatar"
+          src={user.avatar}
+          alt={`${user.name} avatar`}
+        />
+        <div className="user-menu__id">
+          <p className="user-menu__name">{user.name}</p>
+          <p className="user-menu__email">{user.email}</p>
         </div>
       </header>
 
       <button
-        className="mini-profile__item"
+        className="user-menu__item"
         role="menuitem"
         onClick={() => {
           onMyAccount?.();
           onClose?.();
         }}
       >
-        <AccountIcon className="mini-profile__icon" />
+        <AccountIcon className="user-menu__icon" />
         <span>My Account</span>
       </button>
 
-      <div className="mini-profile__item mini-profile__item--static">
-        <MoonIcon className="mini-profile__icon" />
+      <div className="user-menu__item user-menu__item--static">
+        <MoonIcon className="user-menu__icon" />
         <span>Night mode</span>
         <label className="toggle">
           <input
@@ -78,18 +87,18 @@ function MiniProfile({
       </div>
 
       <button
-        className="mini-profile__item mini-profile__item--danger"
+        className="user-menu__item user-menu__item--danger"
         role="menuitem"
         onClick={() => {
           onSignOut?.();
           onClose?.();
         }}
       >
-        <SignOutIcon className="mini-profile__icon" />
+        <SignOutIcon className="user-menu__icon" />
         <span>Sign out</span>
       </button>
     </div>
   );
 }
 
-export default MiniProfile;
+export default UserMenu;

@@ -42,7 +42,7 @@
   align-items: flex-start;
 }
 
-/* Night mode (auxiliary): tint the shell when enabled via mini-profile */
+/* Night mode (auxiliary): tint the shell when enabled via the user menu */
 .app-shell[data-night="true"] {
   --color-bg: #1c2030;
   --color-bg-soft: #141824;

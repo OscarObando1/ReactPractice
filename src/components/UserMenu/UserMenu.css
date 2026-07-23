@@ -1,4 +1,4 @@
-.mini-profile {
+.user-menu {
   position: absolute;
   top: calc(100% + 10px);
   right: 0;
@@ -11,7 +11,7 @@
   z-index: 60;
 }
 
-.mini-profile__head {
+.user-menu__head {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -20,7 +20,7 @@
   margin-bottom: var(--space-2);
 }
 
-.mini-profile__avatar {
+.user-menu__avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -28,17 +28,17 @@
   background: var(--color-bg-muted);
 }
 
-.mini-profile__name {
+.user-menu__name {
   font-weight: var(--fw-bold);
   font-size: var(--fs-sm);
 }
 
-.mini-profile__email {
+.user-menu__email {
   color: var(--color-text-muted);
   font-size: var(--fs-xs);
 }
 
-.mini-profile__item {
+.user-menu__item {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -54,29 +54,29 @@
   transition: background 0.15s ease;
 }
 
-.mini-profile__item:hover:not(.mini-profile__item--static) {
+.user-menu__item:hover:not(.user-menu__item--static) {
   background: var(--color-bg-muted);
 }
 
-.mini-profile__item--static {
+.user-menu__item--static {
   cursor: default;
 }
 
-.mini-profile__item--danger {
+.user-menu__item--danger {
   color: var(--color-danger);
 }
 
-.mini-profile__icon {
+.user-menu__icon {
   font-size: 1.25rem;
   color: var(--color-text-muted);
   flex-shrink: 0;
 }
 
-.mini-profile__item--danger .mini-profile__icon {
+.user-menu__item--danger .user-menu__icon {
   color: var(--color-danger);
 }
 
-.mini-profile__item--static .toggle {
+.user-menu__item--static .toggle {
   margin-left: auto;
 }
 

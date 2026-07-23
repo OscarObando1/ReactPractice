@@ -1,0 +1,108 @@
+/**
+ * Translation dictionaries keyed by language code. Missing keys fall back to
+ * English (see `I18nProvider`'s `t`). Kept dependency-free on purpose; a real
+ * app would swap this for i18next/react-intl behind the same `useTranslation`.
+ */
+export const LANGUAGES = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+  { code: "de", label: "Deutsch" },
+  { code: "fr", label: "Français" },
+];
+
+export const DEFAULT_LANGUAGE = "en";
+
+export const translations = {
+  en: {
+    footer: {
+      product: "Product",
+      features: "Features",
+      pricing: "Pricing",
+      resources: "Resources",
+      blog: "Blog",
+      userGuides: "User guides",
+      webinars: "Webinars",
+      company: "Company",
+      about: "About us",
+      contact: "Contact us",
+      newsletterTitle: "Subscribe to our newsletter",
+      newsletterNote: "For product announcements and exclusive insights",
+      emailPlaceholder: "Input your email",
+      emailAria: "Email address",
+      subscribe: "Subscribe",
+      languageAria: "Select language",
+      privacy: "Privacy",
+      terms: "Terms",
+      rights: "© 2023 Learn, Inc.",
+    },
+  },
+  es: {
+    footer: {
+      product: "Producto",
+      features: "Funciones",
+      pricing: "Precios",
+      resources: "Recursos",
+      blog: "Blog",
+      userGuides: "Guías de usuario",
+      webinars: "Webinars",
+      company: "Empresa",
+      about: "Sobre nosotros",
+      contact: "Contáctanos",
+      newsletterTitle: "Suscríbete a nuestro boletín",
+      newsletterNote: "Para novedades del producto e información exclusiva",
+      emailPlaceholder: "Introduce tu correo",
+      emailAria: "Dirección de correo",
+      subscribe: "Suscribirse",
+      languageAria: "Seleccionar idioma",
+      privacy: "Privacidad",
+      terms: "Términos",
+      rights: "© 2023 Learn, Inc.",
+    },
+  },
+  de: {
+    footer: {
+      product: "Produkt",
+      features: "Funktionen",
+      pricing: "Preise",
+      resources: "Ressourcen",
+      blog: "Blog",
+      userGuides: "Benutzerhandbücher",
+      webinars: "Webinare",
+      company: "Unternehmen",
+      about: "Über uns",
+      contact: "Kontakt",
+      newsletterTitle: "Abonniere unseren Newsletter",
+      newsletterNote: "Für Produktankündigungen und exklusive Einblicke",
+      emailPlaceholder: "E-Mail eingeben",
+      emailAria: "E-Mail-Adresse",
+      subscribe: "Abonnieren",
+      languageAria: "Sprache auswählen",
+      privacy: "Datenschutz",
+      terms: "Bedingungen",
+      rights: "© 2023 Learn, Inc.",
+    },
+  },
+  fr: {
+    footer: {
+      product: "Produit",
+      features: "Fonctionnalités",
+      pricing: "Tarifs",
+      resources: "Ressources",
+      blog: "Blog",
+      userGuides: "Guides d'utilisation",
+      webinars: "Webinaires",
+      company: "Entreprise",
+      about: "À propos",
+      contact: "Contactez-nous",
+      newsletterTitle: "Abonnez-vous à notre newsletter",
+      newsletterNote: "Pour les annonces produit et des analyses exclusives",
+      emailPlaceholder: "Saisissez votre e-mail",
+      emailAria: "Adresse e-mail",
+      subscribe: "S'abonner",
+      languageAria: "Choisir la langue",
+      privacy: "Confidentialité",
+      terms: "Conditions",
+      rights: "© 2023 Learn, Inc.",
+    },
+  },
+};

@@ -4,7 +4,7 @@ import "./Button.css";
  * Reusable Button component.
  *
  * @param {object} props
- * @param {"prime"|"secondary"|"important"} [props.variant="prime"] - Visual style.
+ * @param {"prime"|"secondary"|"important"|"ghost"} [props.variant="prime"] - Visual style.
  * @param {"sm"|"md"|"lg"} [props.size="md"] - Button size.
  * @param {React.ReactNode} [props.icon] - Optional leading icon.
  * @param {React.ReactNode} [props.iconRight] - Optional trailing icon.

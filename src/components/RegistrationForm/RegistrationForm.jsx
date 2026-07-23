@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import TextField from "../TextField/TextField";
 import DatePickerField from "../DatePickerField/DatePickerField";
+import Switch, { Case } from "../Switch/Switch";
 import "./RegistrationForm.css";
 
 const SPECIALIZATIONS = [
@@ -85,7 +86,7 @@ function RegistrationForm({ role = "student", image, onSubmit }) {
     <section className="registration">
       {image && (
         <div className="registration__media">
-          <img src={image} alt="" />
+          <img src={image} alt={`${isTrainer ? "Trainer" : "Student"} registration`} />
         </div>
       )}
 
@@ -93,7 +94,10 @@ function RegistrationForm({ role = "student", image, onSubmit }) {
         <header className="registration__head">
           <h2 className="registration__title">Registration</h2>
           <span className="registration__role">
-            {isTrainer ? "Trainer" : "Student"}
+            <Switch value={role} fallback="Student">
+              <Case value="trainer">Trainer</Case>
+              <Case value="student">Student</Case>
+            </Switch>
           </span>
         </header>
 
@@ -133,48 +137,53 @@ function RegistrationForm({ role = "student", image, onSubmit }) {
               required
             />
 
-            {isTrainer ? (
-              <div className={`field ${errors.specialization ? "field--error" : ""}`}>
-                <label className="field__label" htmlFor="specialization">
-                  Specialization<span className="field__required"> *</span>
-                </label>
-                <div className="field__control">
-                  <select
-                    id="specialization"
-                    name="specialization"
-                    className="field__input"
-                    value={values.specialization}
+            <Switch
+              value={role}
+              fallback={
+                <>
+                  <DatePickerField
+                    label="Date of birth"
+                    selected={values.dob}
+                    onChange={(date) => setField("dob", date)}
+                    placeholder="Optional"
+                  />
+                  <TextField
+                    label="Address"
+                    name="address"
+                    value={values.address}
                     onChange={handleChange}
-                  >
-                    <option value="">Please select</option>
-                    {SPECIALIZATIONS.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="Optional"
+                  />
+                </>
+              }
+            >
+              <Case value="trainer">
+                <div className={`field ${errors.specialization ? "field--error" : ""}`}>
+                  <label className="field__label" htmlFor="specialization">
+                    Specialization<span className="field__required"> *</span>
+                  </label>
+                  <div className="field__control">
+                    <select
+                      id="specialization"
+                      name="specialization"
+                      className="field__input"
+                      value={values.specialization}
+                      onChange={handleChange}
+                    >
+                      <option value="">Please select</option>
+                      {SPECIALIZATIONS.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {errors.specialization && (
+                    <p className="field__error">{errors.specialization}</p>
+                  )}
                 </div>
-                {errors.specialization && (
-                  <p className="field__error">{errors.specialization}</p>
-                )}
-              </div>
-            ) : (
-              <>
-                <DatePickerField
-                  label="Date of birth"
-                  selected={values.dob}
-                  onChange={(date) => setField("dob", date)}
-                  placeholder="Optional"
-                />
-                <TextField
-                  label="Address"
-                  name="address"
-                  value={values.address}
-                  onChange={handleChange}
-                  placeholder="Optional"
-                />
-              </>
-            )}
+              </Case>
+            </Switch>
 
             <Button type="submit" variant="prime" fullWidth loading={loading}>
               {loading ? "Loading..." : "Submit"}

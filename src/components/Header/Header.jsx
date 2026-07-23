@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Navigation from "../Navigation/Navigation";
-import MiniProfile from "../MiniProfile/MiniProfile";
+import UserMenu from "../UserMenu/UserMenu";
 import { LogoIcon, MenuIcon } from "../icons/Icons";
 import "./Header.css";
 
 /**
  * Application header: logo, main navigation and auth actions.
  * Unauthorized users see "Sign In" / "Join Us"; authorized users see their
- * avatar, which opens the MiniProfile dropdown.
+ * avatar, which opens the UserMenu dropdown.
  *
  * @param {object} props
  * @param {boolean} [props.authenticated]
@@ -35,6 +36,18 @@ function Header({
   const [navOpen, setNavOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
+  // Close the mobile drawer when the viewport crosses into desktop width.
+  // Listening to the breakpoint (not every resize event) keeps this free of
+  // per-pixel side effects and avoids a lingering overlay after resizing.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 600px)");
+    const handleChange = (e) => {
+      if (e.matches) setNavOpen(false);
+    };
+    mq.addEventListener("change", handleChange);
+    return () => mq.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <header className="header">
       <div className="container header__inner">
@@ -46,17 +59,10 @@ function Header({
           <MenuIcon />
         </button>
 
-        <a
-          className="header__logo"
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate?.("home");
-          }}
-        >
+        <Link className="header__logo" to="/">
           <LogoIcon className="header__logo-icon" />
           <span>learn</span>
-        </a>
+        </Link>
 
         <div className="header__nav">
           <Navigation
@@ -80,7 +86,7 @@ function Header({
               >
                 <img src={user.avatar} alt="" />
               </button>
-              <MiniProfile
+              <UserMenu
                 user={user}
                 open={profileOpen}
                 onClose={() => setProfileOpen(false)}
@@ -92,16 +98,7 @@ function Header({
             </div>
           ) : (
             <>
-              <Button
-                variant="prime"
-                size="sm"
-                className="header__signin"
-                onClick={onSignIn}
-                style={{
-                  background: "transparent",
-                  color: "var(--color-text)",
-                }}
-              >
+              <Button variant="ghost" size="sm" onClick={onSignIn}>
                 Sign in
               </Button>
               <Button variant="prime" size="sm" onClick={onJoinUs}>
