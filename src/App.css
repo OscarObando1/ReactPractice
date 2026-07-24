@@ -42,6 +42,109 @@
   align-items: flex-start;
 }
 
+/* --- Page layouts (routing task) --- */
+
+.page-hero {
+  padding: var(--space-8) 0 var(--space-6);
+  text-align: center;
+}
+
+.page-hero__title {
+  font-size: var(--fs-2xl, 2rem);
+  font-weight: var(--fw-bold);
+  margin-bottom: var(--space-3);
+}
+
+.page-hero__subtitle {
+  max-width: 34rem;
+  margin: 0 auto var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.page-hero .demo-row {
+  justify-content: center;
+}
+
+.page-head {
+  margin-bottom: var(--space-5);
+}
+
+.page-head__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+.page-head__subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.page-more {
+  margin-top: var(--space-4);
+}
+
+.page-link {
+  color: var(--color-primary, #4f46e5);
+  font-weight: var(--fw-bold);
+}
+
+/* Centered single-column wrapper for auth-style pages (login, register…) */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+}
+
+.auth-page--wide {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.stack-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 380px;
+}
+
+.role-tabs {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.account-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.not-found {
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+
+.not-found__code {
+  font-size: 4rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-primary, #4f46e5);
+  line-height: 1;
+}
+
+.not-found__title {
+  font-size: var(--fs-xl, 1.5rem);
+  font-weight: var(--fw-bold);
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.not-found__text {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
 /* Night mode (auxiliary): tint the shell when enabled via the user menu */
 .app-shell[data-night="true"] {
   --color-bg: #1c2030;

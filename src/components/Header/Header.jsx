@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 import { LogoIcon, MenuIcon } from "../icons/Icons";
+import { PATHS } from "@/routes/paths";
 import "./Header.css";
 
 /**
@@ -14,6 +15,7 @@ import "./Header.css";
  * @param {object} props
  * @param {boolean} [props.authenticated]
  * @param {object} [props.user] - {name,email,avatar}
+ * @param {Array<{id:string,label:string}>} [props.items] - Main nav items.
  * @param {string} props.activeId
  * @param {(id:string) => void} props.onNavigate
  * @param {() => void} [props.onSignIn]
@@ -25,6 +27,7 @@ import "./Header.css";
 function Header({
   authenticated = false,
   user,
+  items,
   activeId,
   onNavigate,
   onSignIn,
@@ -66,6 +69,7 @@ function Header({
 
         <div className="header__nav">
           <Navigation
+            items={items}
             activeId={activeId}
             onSelect={onNavigate}
             open={navOpen}
@@ -90,7 +94,7 @@ function Header({
                 user={user}
                 open={profileOpen}
                 onClose={() => setProfileOpen(false)}
-                onMyAccount={() => onNavigate?.("account")}
+                onMyAccount={() => onNavigate?.(PATHS.myAccount)}
                 onSignOut={onSignOut}
                 nightMode={nightMode}
                 onToggleNight={onToggleNight}

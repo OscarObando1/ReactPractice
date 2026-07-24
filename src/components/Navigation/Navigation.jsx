@@ -1,11 +1,6 @@
 import { CloseIcon } from "../icons/Icons";
+import { PATHS } from "@/routes/paths";
 import "./Navigation.css";
-
-const DEFAULT_ITEMS = [
-  { id: "blog", label: "Blog" },
-  { id: "pricing", label: "Pricing" },
-  { id: "about", label: "About Us" },
-];
 
 /**
  * Main navigation. Horizontal on desktop; slides in from the left on mobile.
@@ -20,7 +15,7 @@ const DEFAULT_ITEMS = [
  * @param {boolean} [props.showAccountItem] - Append "My Account" entry (mobile).
  */
 function Navigation({
-  items = DEFAULT_ITEMS,
+  items = [],
   activeId,
   onSelect,
   open = false,
@@ -29,7 +24,7 @@ function Navigation({
   showAccountItem = false,
 }) {
   const allItems = showAccountItem
-    ? [...items, { id: "account", label: "My Account" }]
+    ? [...items, { id: PATHS.myAccount, label: "My Account" }]
     : items;
 
   const handleSelect = (id) => {
